@@ -113,8 +113,8 @@
             「K5-safari」という名前には、“Keep on going” の “Keep” から取った「K」、そして「5つの目的」を表す「5」、アフリカの象徴である「サファリ」の要素を組み合わせています。
           </p>
         </div>
-      </div>
-      <div class="container">
+    </div>
+    <div class="container">
         <p class="title">
             この「5」は、私たちのダンスセッションが持つ5つの大切な目的を表し、それを続けていくことの大切さを示しています。
         </p>
@@ -151,7 +151,7 @@
             </div>
         </div>
     </div>
-        <div class="z-dance">
+    <div class="z-dance">
             <div class="content-dance">
                 <h2>
                     これらの5つの要素をズンバダンスを通じて実現し、皆さんに「続ける」ことの大切さを伝えたいと考えています。
@@ -172,8 +172,8 @@
             <div class="image-dance">
                 <img src="img/dance.jpeg" alt="Dancing Community">
             </div>
-        </div>
-        <div class="testimonials">
+    </div>
+    <div class="testimonials">
             <h1>お客様の声</h1>
             <p>私たちのクラスについて、以前のクライアントが何と言っているか読んでみてください。</p>
             <div class="cards">
@@ -209,8 +209,8 @@
                 <span>(30代 女性)</span>
               </div>
             </div>
-        </div>
-        <div class="process-flow">
+    </div>
+    <div class="process-flow">
             <div class="line-1"></div>
             <h1>ご利用の流れ</h1>
             <div class="steps">
@@ -240,8 +240,8 @@
                 <p>定期的に参加することで、さらに効果を実感し、運動習慣を身につけましょう。</p>
               </div>
             </div>
-        </div>
-        <div class="form-container">
+    </div>
+    <div class="form-container">
             <h1>お問い合わせフォーム</h1>
             <p>今すぐお問い合わせください！少人数制なので、お早めにご予約をお勧めします。</p>
             <form>
@@ -305,8 +305,75 @@
                 <!-- Submit Button -->
                 <button type="submit" class="submit-btn">お問い合わせ</button>
             </form>
-        </div>
-        <footer class="footer">
+    </div>
+
+    <script>
+        const CLIENT_ID = '948453566700-0aevvm69eh6p9h943jc8osnde7oespo7.apps.googleusercontent.com'; // Replace with your Google OAuth Client ID
+        const API_KEY = 'AIzaSyDR5diiz-o52rtJgxjNV9G6D0ZFG-8rHp4'; // Replace with your Google API Key
+        const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest"];
+        const SCOPES = 'https://www.googleapis.com/auth/gmail.send';
+
+        // Load the Gmail API
+        gapi.load('client:auth2', initClient);
+
+        function initClient() {
+            gapi.client.init({
+                apiKey: API_KEY,
+                clientId: CLIENT_ID,
+                discoveryDocs: DISCOVERY_DOCS,
+                scope: SCOPES,
+            }).then(() => {
+                document.getElementById('contactForm').addEventListener('submit', handleSubmit);
+            });
+        }
+
+        async function handleSubmit(event) {
+            event.preventDefault();
+
+            const firstName = document.getElementById('first-name').value;
+            const surname = document.getElementById('surname').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const message = document.getElementById('message').value;
+
+            const emailBody = `
+                Name: ${firstName} ${surname}
+                Email: ${email}
+                Phone: ${phone}
+                Preferred Date: ${date} at ${time}
+                Message: ${message}
+            `;
+
+            const emailRaw = createEmail('samuelbefikadu10@gmail.com', `New Inquiry from ${firstName} ${surname}`, emailBody);
+
+            try {
+                await gapi.client.gmail.users.messages.send({
+                    'userId': 'me',
+                    'resource': {
+                        'raw': emailRaw,
+                    },
+                });
+
+                alert('お問い合わせが送信されました！ (Inquiry sent successfully!)');
+            } catch (error) {
+                console.error('Error sending email:', error);
+                alert('送信中にエラーが発生しました (An error occurred while sending the inquiry.)');
+            }
+        }
+        function createEmail(to, subject, body) {
+            const email = [
+                `To: ${to}`,
+                `Subject: ${subject}`,
+                'Content-Type: text/plain; charset="UTF-8"',
+                '',
+                body,
+            ].join('\r\n');
+            return btoa(email).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+        }
+    </script>
+    <footer class="footer">
             <div class="social-icons">
               <a href="#" class="icon"><span class="fab fa-twitter"></span></a>
               <a href="#" class="icon"><span class="fab fa-facebook-f"></span></a>
@@ -315,6 +382,6 @@
             <p class="copyright">
               Copyright © 2024 K5-safari. All rights reserved.
             </p>
-        </footer>
+    </footer>
 </body>
 </html>
