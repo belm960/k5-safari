@@ -1045,6 +1045,7 @@ body {
     padding-bottom: 100px;
     opacity: 0;
     animation: fadeIn 1s forwards;
+    z-index: -1000;
   }
   
   /* Form Header */
@@ -1130,9 +1131,6 @@ body {
   }
   textarea{
     height: 285px;
-  }
-  input:hover, textarea:hover, select:hover {
-    transform: scale(1.02);
   }
   /* Input focus state */
   input:focus, textarea:focus, select:focus {
@@ -1294,3 +1292,200 @@ body {
     text-decoration-skip-ink: none;
   }
   
+  .form-group {
+    position: relative;
+    font-family: Arial, sans-serif;
+    z-index: 9999;
+  }
+  
+  .date-picker-dropdown {
+    position: absolute;
+    top: 140px;
+    left: 0;
+    background: #FFF5DE;
+    border: 1px solid #FF8D77;
+    border-radius: 5px;
+    width: 375px;
+    z-index: 9999;
+    padding: 10px 20px;
+    animation: fadeIn 1s ease forwards;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px); /* Slightly above the input */
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0); /* In position */
+    }
+  }
+  
+  .date-picker-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    padding: 10px 0 0 0;
+    background: transparent;
+    border: none;
+    color: #262626;
+    z-index: 9999;
+  }
+  
+  .weekdays {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+    grid-template-columns: repeat(7, 1fr);
+    background: transparent;
+    gap: 15px;
+    z-index: 9999;
+    font-family: Inter;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 20.00px;
+      letter-spacing: -0.01em;
+      text-align: center;
+      text-underline-position: from-font;
+      text-decoration-skip-ink: none;
+      color: #727272;
+  }
+  .hr-line{
+      border: 0.1px solid #FF8D77;
+      margin-bottom: 20px;
+  }
+  .days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    z-index: 9999;
+  }
+  
+  .days span {
+      font-family: Inter;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 20px;
+      letter-spacing: -0.01em;
+      text-align: center;
+      text-underline-position: from-font;
+      text-decoration-skip-ink: none;
+      color:#262626;
+  
+      padding: 10px 0px;
+      border-radius: 50%;
+      text-align: center;
+      cursor: pointer;
+      z-index: 9999;
+  }
+  
+  .days span:hover {
+      background: #D95A2C;
+      color: #fff;
+  }
+  
+  .days span.selected {
+      background: #D95A2C;
+      color: #fff;
+  }
+  .current-month-year{
+      font-family: Inter;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 23.64px;
+      letter-spacing: -0.01em;
+      text-align: center;
+      text-underline-position: from-font;
+      text-decoration-skip-ink: none;
+  
+  }
+  .time-dropdown {
+      position: absolute;
+      top: 140px;
+      right: 0;
+      background: #FFF5DE;
+      border: 1px solid #FF8D77;
+      border-radius: 5px;
+      width: 375px;
+      z-index: 9999;
+      padding: 10px 20px;
+      animation: fadeIn 1s ease forwards;
+      display: none;
+  }
+  
+  .time-dropdown.active {
+    display: block;
+  }
+  
+  .time-header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+      padding: 10px 0 0 0;
+      margin: 20px auto;
+      background: transparent;
+      border: none;
+      color: #262626;
+      z-index: 9999;
+  }
+  
+  .time-nav {
+    background: none;
+    border: none;
+    font-size: 14px;
+    color: #262626;
+    cursor: pointer;
+  }
+  
+  .time-period {
+      font-family: Inter;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 23.64px;
+      letter-spacing: -0.01em;
+      text-align: center;
+      text-underline-position: from-font;
+      text-decoration-skip-ink: none;
+      color: #262626;
+  }
+  
+  .time-options {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    padding: 10px;
+  }
+  
+  .time-option {
+      color: #262626;
+      padding: 10px;
+      cursor: pointer;
+      background: transparent;
+      font-family: Inter;
+      font-size: 14.5px;
+      font-weight: 600;
+      line-height: 21.46px;
+      letter-spacing: -0.01em;
+      text-align: center;
+      text-underline-position: from-font;
+      text-decoration-skip-ink: none;
+  }
+  
+  .time-option:hover {
+    background: #D95A2C;
+    border-radius: 5px;
+    color: white;
+  }
+  
+  .time-option.selected {
+    background: #D95A2C;
+    border-radius: 5px;
+    color: #fff;
+  }

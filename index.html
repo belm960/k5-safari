@@ -271,44 +271,193 @@
                 <input type="tel" id="phone" required>
                 </div>
                 <!-- Preferred Date -->
-                <div class="form-group">
+                <div class="form-group" style="z-index: 9999; overflow: visible;">
                 <label for="date">*ご希望の日時 (Preferred date and time) *</label>
                 <div class="date-txt">次回セッションの希望日をお選びください。（Instagramで確認した日程から選択）</div>
-                <div class="date-fields">
-                    <div class="field">
+                <div class="date-fields" style="z-index: 1;">
+                    <div class="field date-field">
                         <span class="icon"><img class="icon" src="img/date-icon.png" width="30px" height="30px"></span>
-                        <select id="date" class="dropdown" required>
-                        <option value=""></option>
-                        <option value="2024-11-26">2024-11-26</option>
-                        <option value="2024-11-27">2024-11-27</option>
-                        <option value="2024-11-28">2024-11-28</option>
-                        </select>
+                        <input id="date" class="dropdown" required readonly>
                         <span class="icon"><img class="icon" src="img/Polygon 1.png" width="15px" height="10px"></span>
                     </div>
-                    <div class="field">
+                    <div class="field time-field" >
                         <span class="icon"><img class="icon" src="img/time-icon.png" width="30px" height="30px"></span>
-                        <select id="time" class="dropdown">
-                          <option value=""></option>
-                          <option value="morning">Morning</option>
-                          <option value="afternoon">Afternoon</option>
-                          <option value="evening">Evening</option>
-                        </select>
+                        <input id="time" class="dropdown" required readonly>
                         <span class="icon"><img class="icon" src="img/Polygon 1.png" width="15px" height="10px"></span>
+                    </div>
+                </div>
+                <div class="date-picker-dropdown hidden">
+                    <div class="date-picker-header">
+                    <div class="prev-month" style="cursor: pointer; margin-right: 20px; color:#0B4E6C;">◀</div>
+                    <span class="current-month-year"></span>
+                    <div class="next-month" style="cursor: pointer; margin-left: 20px; color:#0B4E6C;">▶</div>
+                    </div>
+                    <div class="date-picker-body">
+                    <div class="weekdays">
+                        <div>SUN</div>
+                        <div>MON</div>
+                        <div>TUE</div>
+                        <div>WED</div>
+                        <div>THU</div>
+                        <div>FRI</div>
+                        <div>SAT</div>
+                    </div>
+                    <hr class="hr-line">
+                    <div class="days"></div>
+                    </div>
+                </div>
+                <div class="time-dropdown">
+                    <div class="time-header">
+                      <div class="time-nav prev" style="cursor: pointer; margin-right: 20px; color:#0B4E6C;">◀</div>
+                      <span class="time-period">PM</span>
+                      <div class="time-nav next" style="cursor: pointer; margin-left: 20px; color:#0B4E6C;">▶</div>
+                    </div>
+                    <div class="time-options">
+                      <!-- Add time options dynamically using JavaScript -->
                     </div>
                 </div>
                 </div>
                 <!-- Message -->
-                <div class="form-group">
-                <label for="message">お問い合わせ内容 (Message)</label>
-                <div class="date-txt">質問やリクエスト、健康上の注意点や、配慮が必要な事項があればこちらにご記入ください。</div>
-                <textarea id="message" rows="5"></textarea>
+                <div class="form-group" style="z-index: 1;">
+                <label for="message" style="z-index: 1;">お問い合わせ内容 (Message)</label>
+                <div class="date-txt" style="z-index: 1;">質問やリクエスト、健康上の注意点や、配慮が必要な事項があればこちらにご記入ください。</div>
+                <textarea id="message" rows="5" style="z-index: 1;"></textarea>
                 </div>
                 <!-- Submit Button -->
                 <button type="submit" class="submit-btn">お問い合わせ</button>
             </form>
-    </div>
+    </div>           
+<script>
 
-    <script>
+        // Variables to track the current month and year
+        let currentMonth = new Date().getMonth();
+        let currentYear = new Date().getFullYear();
+
+        // Elements
+        const datePickerTrigger = document.querySelector(".date-field");
+        const inputTag = datePickerTrigger.querySelector("input");
+        const dateValue = document.querySelector(".date-field");
+        const datePickerDropdown = document.querySelector(".date-picker-dropdown");
+        const currentMonthYear = document.querySelector(".current-month-year");
+        const daysContainer = document.querySelector(".days");
+        const prevMonthButton = document.querySelector(".prev-month");
+        const nextMonthButton = document.querySelector(".next-month");
+
+        // Show/Hide the dropdown
+        datePickerTrigger.addEventListener("click", () => {
+        datePickerDropdown.classList.toggle("hidden");
+        });
+
+        // Populate the calendar with days
+        function populateCalendar(month, year) {
+        daysContainer.innerHTML = "";
+        currentMonthYear.textContent = new Date(year, month).toLocaleString("default", {
+            month: "long",
+            year: "numeric",
+        });
+
+        const firstDay = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+        // Add blank spaces for the first week
+        for (let i = 0; i < firstDay; i++) {
+            daysContainer.innerHTML += `<span></span>`;
+        }
+
+        // Add actual days
+        for (let day = 1; day <= daysInMonth; day++) {
+            const dayElement = document.createElement("span");
+            dayElement.textContent = day;
+
+            // Highlight selected date
+            dayElement.addEventListener("click", () => {
+            document.querySelectorAll(".days span").forEach((el) =>
+                el.classList.remove("selected")
+            );
+            dayElement.classList.add("selected");
+            inputTag.value = `${year}-${month + 1}-${day}`;
+            datePickerDropdown.classList.add("hidden");
+            });
+
+            daysContainer.appendChild(dayElement);
+        }
+        }
+
+        // Change months
+        prevMonthButton.addEventListener("click", () => {
+        currentMonth = (currentMonth - 1 + 12) % 12;
+        if (currentMonth === 11) currentYear--;
+        populateCalendar(currentMonth, currentYear);
+        });
+
+        nextMonthButton.addEventListener("click", () => {
+        currentMonth = (currentMonth + 1) % 12;
+        if (currentMonth === 0) currentYear++;
+        populateCalendar(currentMonth, currentYear);
+        });
+
+        // Initialize the calendar
+        populateCalendar(currentMonth, currentYear);
+
+
+        const timeField = document.querySelector(".time-field");
+        const time = document.getElementById("time");
+        const timeDropdown = document.querySelector(".time-dropdown");
+        const timePeriod = document.querySelector(".time-period");
+        const timeOptionsContainer = document.querySelector(".time-options");
+        const inputField = document.querySelector(".time-field input");
+
+        let isDropdownVisible = false;
+        let currentPeriod = "PM";
+
+        // Generate time options
+        function generateTimeOptions(period) {
+        timeOptionsContainer.innerHTML = ""; // Clear previous options
+        const startHour = period === "AM" ? 0 : 12; // Start at 12:00 for PM
+        const endHour = startHour + 12;
+
+        for (let hour = startHour; hour < endHour; hour++) {
+            const displayHour = hour % 12 === 0 ? 12 : hour % 12; // Convert to 12-hour format
+            const option = document.createElement("div");
+            option.className = "time-option";
+            option.textContent = `${displayHour}:00`;
+            option.addEventListener("click", () => {
+            // Set selected time in the input field
+            inputField.value = `${displayHour}:00 ${currentPeriod}`;
+            timeOptionsContainer
+                .querySelectorAll(".time-option")
+                .forEach((opt) => opt.classList.remove("selected"));
+            option.classList.add("selected");
+
+            // Hide dropdown
+            toggleDropdown();
+            });
+            timeOptionsContainer.appendChild(option);
+        }
+        }
+
+        // Toggle dropdown visibility
+        function toggleDropdown() {
+        isDropdownVisible = !isDropdownVisible;
+        timeDropdown.classList.toggle("active", isDropdownVisible);
+        }
+
+        // Change time period
+        function changePeriod(direction) {
+        currentPeriod = currentPeriod === "AM" ? "PM" : "AM";
+        timePeriod.textContent = currentPeriod;
+        generateTimeOptions(currentPeriod);
+        }
+
+        // Event listeners
+        timeField.addEventListener("click", toggleDropdown);
+        document.querySelector(".time-nav.prev").addEventListener("click", () => changePeriod("prev"));
+        document.querySelector(".time-nav.next").addEventListener("click", () => changePeriod("next"));
+
+        // Initialize time picker
+        generateTimeOptions(currentPeriod);
+
+        // Form submission starts here
         const CLIENT_ID = '948453566700-0aevvm69eh6p9h943jc8osnde7oespo7.apps.googleusercontent.com'; // Replace with your Google OAuth Client ID
         const API_KEY = 'AIzaSyDR5diiz-o52rtJgxjNV9G6D0ZFG-8rHp4'; // Replace with your Google API Key
         const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest"];
