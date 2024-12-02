@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K5-Safari</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="index.css" rel="stylesheet">
+    <script src="https://apis.google.com/js/api.js"></script>
+    <style>
+
+    .confirm-box {
+        align-items: center;
+        justify-content: center;
+        border-radius: 6px;
+        background: url(img/Mask\ group\ \(1\).png), linear-gradient(246.21deg, rgba(255, 141, 119, 0.9) 28.38%, rgba(255, 116, 88, 0.9) 54.46%, rgba(255, 98, 67, 0.9) 71.62%);
+        background-size: contain;
+        background-position: bottom;
+        background-repeat: no-repeat;
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+        width: 80%; 
+        height: 80vh; 
+        margin: 30px auto; 
+        padding: 30px 0;
+    }
+
+    .confirm-box h1 {
+        margin-bottom: 20px;
+        font-family: Inter;
+        font-size: 30px;
+        font-weight: 600;
+        line-height: 40.13px;
+        text-align: center;
+        text-underline-position: from-font;
+        text-decoration-skip-ink: none;
+        color: white;
+    }
+
+    .details {
+      margin: 0 auto;
+      background: transparent;
+      border: none;
+      color: #ffffff;
+      padding: 20px;
+      text-align: left;
+      width: 80%;
+      align-items: center;
+    }
+
+    .list{
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+        margin: 0 0 20px 0;
+    }
+    .title-confirm{
+        width: 40%;
+        font-family: Inter;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 24.08px;
+        text-align: left;
+        text-underline-position: from-font;
+        text-decoration-skip-ink: none;
+
+    }
+    .text-confirm{
+        width: 60%;
+        text-align: left;
+        font-family: Inter;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 24.08px;
+        text-align: left;
+        text-underline-position: from-font;
+        text-decoration-skip-ink: none;
+    }
+
+    .details strong {
+      display: inline-block;
+      width: 150px;
+    }
+
+    .button {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 7px 30px;
+        font-size: 16px;
+        background: #FDE1A0;
+        border-radius: 30px;
+        border: 2px solid #F1D371;
+        font-family: Inter;
+        font-weight: 500;
+        line-height: 18.56px;
+        text-align: center;
+        text-decoration: none;
+        color: #D95A2C;
+        transition: transform 0.5s smooth;
+    }
+
+    .button:hover {
+      background: #fce8b9;
+      transform: scale(1.05);
+    }
+
+    .background {
+      margin-top: 30px;
+      height: 120px;
+      background: url('https://i.imgur.com/JTOU1nx.png') no-repeat center bottom;
+      background-size: contain;
+    }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1 class="site-name">K5-safari</h1>
+        <div class="nav-right">
+            <p>
+                私たちとつながる
+            </p>
+            <div class="social-buttons">
+                <a href="#" class="circle-button">
+                  <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="circle-button">
+                  <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="circle-button">
+                  <i class="fab fa-instagram"></i>
+                </a>
+              </div>              
+        </div>
+    </div>
+    <div class="confirm-box">
+        <h1>詳細を確認してください。</h1>
+        <div class="details">
+            <div class="list">
+                <div class="title-confirm">フルネーム:</div> 
+                <div class="text-confirm"></div>
+            </div>
+            <div class="list">
+                <div class="title-confirm">Email Address:</div> 
+                <div class="text-confirm"></div>
+            </div>
+            <div class="list">
+                <div class="title-confirm">Telephone Number:</div> 
+                <div class="text-confirm"></div>
+            </div>
+            <div class="list">
+                <div class="title-confirm">*ご希望の日時:</div> 
+                <div class="text-confirm"></div>
+            </div>
+            <div class="list">
+                <div class="title-confirm">お問い合わせ内容:</div> 
+                <div class="text-confirm"></div>
+            </div>
+        </div>
+        <a id="confirm-btn" class="button">詳細を確認します</a>
+        <div class="background"></div>
+    </div>
+    <footer class="footer">
+            <div class="social-icons">
+              <a href="#" class="icon"><span class="fab fa-twitter"></span></a>
+              <a href="#" class="icon"><span class="fab fa-facebook-f"></span></a>
+              <a href="#" class="icon"><span class="fab fa-instagram"></span></a>
+            </div>
+            <p class="copyright">
+              Copyright © 2024 K5-safari. All rights reserved.
+            </p>
+    </footer>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    
+    <script>
+    // Initialize EmailJS
+    emailjs.init("3OpFJddHcfGQA1_rK"); // Replace with your EmailJS User ID
+            
+    // Retrieve the object from localStorage
+    const retrievedData = localStorage.getItem('templateParams');
+
+    // Parse the JSON string into an object
+    const parsedData = JSON.parse(retrievedData);
+    
+    // Select all elements with the `text-confirm` class
+    const textElements = document.querySelectorAll('.text-confirm');
+
+    // Map object keys to elements (assumes elements follow the same naming as keys)
+    Object.keys(parsedData).forEach((key, index) => {
+        // Safely update elements
+        if (textElements[index]) {
+            textElements[index].innerHTML = parsedData[key];
+        }
+    });
+
+    // Form submission event
+    document.getElementById('confirm-btn').addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent form from reloading the page
+
+        // Send the email using EmailJS
+        if(parsedData){
+            emailjs.send("service_u6oxre9","template_53rwoc8", parsedData)
+            .then(function(response) {
+                emailjs.send("service_u6oxre9","template_budz30c", parsedData)
+                .then(function(response) {
+                    window.location.href="./thankyou.html"
+                    localStorage.removeItem('templateParams');
+                }, function(error) {
+                    alert("Failed to send email. Please try again later.");
+                    console.error("Error:", error);
+                });
+            }, function(error) {
+                alert("Failed to send email. Please try again later.");
+                console.error("Error:", error);
+            });
+        }
+    });
+    </script>
+</body>
+</html>

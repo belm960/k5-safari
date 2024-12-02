@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K5-Safari</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="index.css" rel="stylesheet">
+    <script src="https://apis.google.com/js/api.js"></script>
+    <style>
+        .thank-box {
+            display: flex;
+            height: 90vh;
+        }
+        .left-section {
+            flex: 1;
+            background: linear-gradient(#FF7458ED,#FF7458ED),url(img/thankbg.png);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .left-section .content-thank h1 {
+            width: 70%;
+            margin: auto;
+            color: white;
+            margin-bottom: 30px;
+            font-family: Inter;
+            font-size: 32px;
+            font-weight: 500;
+            line-height: 44.13px;
+            text-align: center;
+            justify-content: space-between;
+            text-underline-position: from-font;
+            text-decoration-skip-ink: none;
+        }
+        .btn {
+            background: #FFF8E8;
+            color: #FF7458;
+            border: 1.5px solid #E8B133;
+            padding: 10px 40px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: Inter;
+            font-weight: 500;
+            line-height: 26.04px;
+            text-align: center;
+            text-underline-position: from-font;
+            text-decoration-skip-ink: none;
+
+        }
+        .btn:hover {
+            background-color: #f5a585;
+            color: white;
+        }
+        .right-section {
+            flex: 1;
+            background: url(img/thank.jpg) no-repeat center center/cover;
+            position: relative;
+        }
+        .right-section .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.4));
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1 class="site-name">K5-safari</h1>
+        <div class="nav-right">
+            <p>
+                私たちとつながる
+            </p>
+            <div class="social-buttons">
+                <a href="#" class="circle-button">
+                  <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="circle-button">
+                  <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="circle-button">
+                  <i class="fab fa-instagram"></i>
+                </a>
+              </div>              
+        </div>
+    </div>
+    <div class="thank-box">
+        <div class="left-section">
+            <div class="content-thank">
+                <h1>お問合せいただき、ありがとうございます。 担当者よりご連絡させていただきます。 今しばらくお待ちください。</h1>
+                <button onclick="window.location.href='./index.html'" class="btn">ホームページに戻る</button>
+            </div>
+        </div>
+        <div class="right-section">
+            <div class="overlay"></div>
+        </div>
+    </div>
+    <footer class="footer">
+            <div class="social-icons">
+              <a href="#" class="icon"><span class="fab fa-twitter"></span></a>
+              <a href="#" class="icon"><span class="fab fa-facebook-f"></span></a>
+              <a href="#" class="icon"><span class="fab fa-instagram"></span></a>
+            </div>
+            <p class="copyright">
+              Copyright © 2024 K5-safari. All rights reserved.
+            </p>
+    </footer>
+</body>
+</html>

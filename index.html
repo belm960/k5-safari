@@ -277,12 +277,12 @@
                 <div class="date-fields" style="z-index: 1;">
                     <div class="field date-field">
                         <span class="icon"><img class="icon" src="img/date-icon.png" width="30px" height="30px"></span>
-                        <input id="date" class="dropdown" required readonly>
+                        <input id="date" class="dropdown" required>
                         <span class="icon"><img class="icon" src="img/Polygon 1.png" width="15px" height="10px"></span>
                     </div>
                     <div class="field time-field" >
                         <span class="icon"><img class="icon" src="img/time-icon.png" width="30px" height="30px"></span>
-                        <input id="time" class="dropdown" required readonly>
+                        <input id="time" class="dropdown" required>
                         <span class="icon"><img class="icon" src="img/Polygon 1.png" width="15px" height="10px"></span>
                     </div>
                 </div>
@@ -326,7 +326,24 @@
                 <!-- Submit Button -->
                 <button type="submit" class="submit-btn">お問い合わせ</button>
             </form>
-    </div>           
+    </div> 
+    <script>
+      document.getElementById('contactForm').addEventListener('submit', function(event) {
+          event.preventDefault(); // Prevent form from reloading the p
+          // Collect form data
+          const templateParams = {
+              fullName: document.getElementById('first-name').value+ " " + document.getElementById('surname').value,
+              email: document.getElementById('email').value,
+              phone: document.getElementById('phone').value,
+              date: document.getElementById('date').value + ", " + document.getElementById('time').value,
+              message: document.getElementById('message').value
+          };
+          // Store the object in localStorage
+          localStorage.setItem('templateParams', JSON.stringify(templateParams));
+          window.location.href = 'confirm.html';
+      });
+    </script>
+              
 <script>
 
         // Variables to track the current month and year
@@ -457,71 +474,6 @@
         // Initialize time picker
         generateTimeOptions(currentPeriod);
 
-        // Form submission starts here
-        const CLIENT_ID = '948453566700-0aevvm69eh6p9h943jc8osnde7oespo7.apps.googleusercontent.com'; // Replace with your Google OAuth Client ID
-        const API_KEY = 'AIzaSyDR5diiz-o52rtJgxjNV9G6D0ZFG-8rHp4'; // Replace with your Google API Key
-        const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest"];
-        const SCOPES = 'https://www.googleapis.com/auth/gmail.send';
-
-        // Load the Gmail API
-        gapi.load('client:auth2', initClient);
-
-        function initClient() {
-            gapi.client.init({
-                apiKey: API_KEY,
-                clientId: CLIENT_ID,
-                discoveryDocs: DISCOVERY_DOCS,
-                scope: SCOPES,
-            }).then(() => {
-                document.getElementById('contactForm').addEventListener('submit', handleSubmit);
-            });
-        }
-
-        async function handleSubmit(event) {
-            event.preventDefault();
-
-            const firstName = document.getElementById('first-name').value;
-            const surname = document.getElementById('surname').value;
-            const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
-            const date = document.getElementById('date').value;
-            const time = document.getElementById('time').value;
-            const message = document.getElementById('message').value;
-
-            const emailBody = `
-                Name: ${firstName} ${surname}
-                Email: ${email}
-                Phone: ${phone}
-                Preferred Date: ${date} at ${time}
-                Message: ${message}
-            `;
-
-            const emailRaw = createEmail('samuelbefikadu10@gmail.com', `New Inquiry from ${firstName} ${surname}`, emailBody);
-
-            try {
-                await gapi.client.gmail.users.messages.send({
-                    'userId': 'me',
-                    'resource': {
-                        'raw': emailRaw,
-                    },
-                });
-
-                alert('お問い合わせが送信されました！ (Inquiry sent successfully!)');
-            } catch (error) {
-                console.error('Error sending email:', error);
-                alert('送信中にエラーが発生しました (An error occurred while sending the inquiry.)');
-            }
-        }
-        function createEmail(to, subject, body) {
-            const email = [
-                `To: ${to}`,
-                `Subject: ${subject}`,
-                'Content-Type: text/plain; charset="UTF-8"',
-                '',
-                body,
-            ].join('\r\n');
-            return btoa(email).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-        }
     </script>
     <footer class="footer">
             <div class="social-icons">

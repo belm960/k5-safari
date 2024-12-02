@@ -4,44 +4,36 @@
   padding: 0;
   box-sizing: border-box;
 }
+/* General scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+  height: 8px; /* Height for horizontal scrollbar */
+}
+
+/* Scrollbar track */
+::-webkit-scrollbar-track {
+  background: #ffeee1; /* Light pink track color */
+  border-radius: 10px; /* Rounded edges */
+  border: 1px solid #fbca9c; /* Add a cute border color */
+}
+
+/* Scrollbar thumb */
+::-webkit-scrollbar-thumb {
+  background: #f8ab52; /* Thumb color (cute pink) */
+  border-radius: 10px; /* Rounded corners for the thumb */
+  border: 2px solid #ffe4e1; /* Border for the thumb */
+}
+
+/* Scrollbar thumb hover effect */
+::-webkit-scrollbar-thumb:hover {
+  background: #f09662; /* Slightly darker pink when hovered */
+}
 body {
   width: 100%;
   height: 100%;
   background: #FFFDF5;
   margin: 0;
   padding: 0;
-}
-
-/* Keyframes for fade-in slide-down animation */
-@keyframes fadeInSlideDown {
-  from {
-      opacity: 0;
-      transform: translateY(-20px);
-  }
-  to {
-      opacity: 1;
-      transform: translateY(0);
-  }
-}
-@keyframes fadeInSlideUp {
-  from {
-      opacity: 0;
-      transform: translateY(20px);
-  }
-  to {
-      opacity: 1;
-      transform: translateY(0);
-  }
-}
-
-/* Keyframes for pulse effect */
-@keyframes pulse {
-  0%, 100% {
-      transform: scale(1);
-  }
-  50% {
-      transform: scale(1.05);
-  }
 }
 
 /* Header animation on page load */
@@ -119,30 +111,6 @@ body {
   transform: scale(1.2); /* Enlarges the button */
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
   background-color: #EFDA95; /* Changes background color */
-}
-
-/* Keyframes for text fade-in and slide-left */
-@keyframes fadeInSlideLeft {
-  from {
-      opacity: 0;
-      transform: translateX(-50px);
-  }
-  to {
-      opacity: 1;
-      transform: translateX(0);
-  }
-}
-
-/* Keyframes for text fade-in and slide-right */
-@keyframes fadeInSlideRight {
-  from {
-      opacity: 0;
-      transform: translateX(50px);
-  }
-  to {
-      opacity: 1;
-      transform: translateX(0);
-  }
 }
 
 /* Home section */
@@ -231,7 +199,7 @@ body {
 
 /* Image with hover effect */
 .img-div img {
-  width: 460px;
+  width: 450px;
   height: 430px;
   gap: 0px;
   border: 1px solid #696969;
@@ -248,114 +216,97 @@ body {
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); /* Adds a shadow */
 }
 .recommend {
-    align-items: center;
-    justify-content: center;
-    margin-top: 60px;
-    width: 100%;
-    animation: fadeInSlideUp 1s ease-out;
+  align-items: center;
+  justify-content: center;
+  margin-top: 60px;
+  width: 100%;
+  animation: fadeInSlideUp 1s ease-out;
 }
-
 .r-title {
-    font-family: Inter;
-    font-size: 38px;
-    font-weight: 600;
-    line-height: 47.13px;
-    text-align: center;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
+  font-family: Inter;
+  font-size: 38px;
+  font-weight: 600;
+  line-height: 47.13px;
+  text-align: center;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
 }
-
 .r-content {
-    margin-top: 40px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Allows items to wrap onto the next row */
-    gap: 25px; /* Adds spacing between items */
-    justify-content: center;
-    padding: 20px 237px;
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Allows items to wrap onto the next row */
+  gap: 25px; /* Adds spacing between items */
+  justify-content: center;
+  padding: 20px 237px;
 }
-
 .box-1 {
-    text-align: center;
-    width: 305px;
-    height: 294px;
-    border-radius: 5px;
-    background: radial-gradient(69.51% 72.11% at 12.95% 37.07%, rgba(255, 204, 85, 0.93) 0%, rgba(232, 177, 51, 0.93) 100%), url(img/box-1.jpeg);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    border: 2px solid #7f7e7e;
-    align-items: center;
-    justify-content: content;
-    transform: scale(0.95);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    animation: fadeIn 0.4s ease forwards;
-    opacity: 0;
+  text-align: center;
+  width: 305px;
+  height: 294px;
+  border-radius: 5px;
+  background: radial-gradient(69.51% 72.11% at 12.95% 37.07%, rgba(255, 204, 85, 0.93) 0%, rgba(232, 177, 51, 0.93) 100%), url(img/box-1.jpeg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 2px solid #7f7e7e;
+  align-items: center;
+  justify-content: content;
+  transform: scale(0.95);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeInAt 0.4s ease forwards;
+  opacity: 0;
 }
-
 .box-1:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
-
 .box-2 {
-    height: 382px;
-    background: radial-gradient(69.51% 72.11% at 12.95% 37.07%, rgba(255, 204, 85, 0.93) 0%, rgba(232, 177, 51, 0.93) 100%), url(img/box-2.jpeg);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+  height: 382px;
+  background: radial-gradient(69.51% 72.11% at 12.95% 37.07%, rgba(255, 204, 85, 0.93) 0%, rgba(232, 177, 51, 0.93) 100%), url(img/box-2.jpeg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
-
 .box-3 {
-    background: radial-gradient(69.51% 72.11% at 12.95% 37.07%, rgba(255, 204, 85, 0.93) 0%, rgba(232, 177, 51, 0.93) 100%), url(img/box-3.jpeg);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+  background: radial-gradient(69.51% 72.11% at 12.95% 37.07%, rgba(255, 204, 85, 0.93) 0%, rgba(232, 177, 51, 0.93) 100%), url(img/box-3.jpeg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
-
 .box-4 {
-    height: 382px;
-    background: radial-gradient(69.51% 72.11% at 12.95% 37.07%, rgba(255, 204, 85, 0.93) 0%, rgba(232, 177, 51, 0.93) 100%), url(img/box-4.jpeg);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    transform: translateY(-88px);
+  height: 382px;
+  background: radial-gradient(69.51% 72.11% at 12.95% 37.07%, rgba(255, 204, 85, 0.93) 0%, rgba(232, 177, 51, 0.93) 100%), url(img/box-4.jpeg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transform: translateY(-88px);
 }
-
 .box-5 {
-    background: radial-gradient(69.51% 72.11% at 12.95% 37.07%, rgba(255, 204, 85, 0.93) 0%, rgba(232, 177, 51, 0.93) 100%), url(img/box-5.jpeg);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+  background: radial-gradient(69.51% 72.11% at 12.95% 37.07%, rgba(255, 204, 85, 0.93) 0%, rgba(232, 177, 51, 0.93) 100%), url(img/box-5.jpeg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
-
 .box-6 {
-    height: 382px;
-    background: radial-gradient(69.51% 72.11% at 12.95% 37.07%, rgba(255, 204, 85, 0.93) 0%, rgba(232, 177, 51, 0.93) 100%), url(img/box-6.jpeg);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    transform: translateY(-88px);
+  height: 382px;
+  background: radial-gradient(69.51% 72.11% at 12.95% 37.07%, rgba(255, 204, 85, 0.93) 0%, rgba(232, 177, 51, 0.93) 100%), url(img/box-6.jpeg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transform: translateY(-88px);
 }
-
 .r-box-text {
-    font-family: Inter;
-    font-size: 25px;
-    font-weight: 500;
-    line-height: 31px;
-    text-align: center;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
-    color: #FFFFFF;
-    width: 75%;
-    margin: auto;
-    margin-top: 40%;
-}
-
-/* Keyframes for fade-in effect */
-@keyframes fadeIn {
-    to {
-        opacity: 1;
-    }
+  font-family: Inter;
+  font-size: 25px;
+  font-weight: 500;
+  line-height: 31px;
+  text-align: center;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #FFFFFF;
+  width: 75%;
+  margin: auto;
+  margin-top: 40%;
 }
 
 /* Parent container */
@@ -446,29 +397,6 @@ body {
 .service-img-div img:hover {
   transform: scale(1.05);
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
-}
-
-/* Animations */
-@keyframes fadeInLeft {
-  from {
-      opacity: 0;
-      transform: translateX(-50px);
-  }
-  to {
-      opacity: 1;
-      transform: translateX(0);
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-      opacity: 0;
-      transform: translateY(20px);
-  }
-  to {
-      opacity: 1;
-      transform: translateY(0);
-  }
 }
 
 .container-vision {
@@ -596,17 +524,6 @@ body {
     animation: slideIn 0.8s forwards; /* Add animation */
 }
 
-@keyframes slideIn {
-    0% {
-        opacity: 0;
-        transform: translateY(50px); /* Initial position below */
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0); /* Final position */
-    }
-}
-
 /* Image styles */
 .item img {
     max-width: 100%;
@@ -661,19 +578,6 @@ body {
   transform: translateY(50px);
   animation: fadeInUp 0.8s forwards; /* Animation on load */
 }
-
-/* Keyframes for fade-in and slide-up animation */
-@keyframes fadeInUp {
-  0% {
-      opacity: 0;
-      transform: translateY(50px);
-  }
-  100% {
-      opacity: 1;
-      transform: translateY(0);
-  }
-}
-
 /* Content styling inside the .z-dance container */
 .content-dance {
   flex: 1;
@@ -748,18 +652,6 @@ body {
   background-size: contain;
   background-position: bottom;
   background-repeat: no-repeat;}
-
-/* Animation for sliding content in */
-@keyframes slideIn {
-  0% {
-      opacity: 0;
-      transform: translateY(20px);
-  }
-  100% {
-      opacity: 1;
-      transform: translateY(0);
-  }
-}
 
 
 .testimonials {
@@ -883,18 +775,6 @@ body {
   animation: fadeInUp 0.8s forwards; /* Fade-in and slide-up animation */
 }
 
-/* Keyframe for the fadeInUp animation */
-@keyframes fadeInUp {
-  0% {
-      opacity: 0;
-      transform: translateY(50px);
-  }
-  100% {
-      opacity: 1;
-      transform: translateY(0);
-  }
-}
-
 .process-flow h1 {
   margin-bottom: 70px;
   font-family: Inter;
@@ -1005,18 +885,6 @@ body {
   animation: lineAnimation 1s forwards 0.5s; /* Animation for the dashed line */
 }
 
-/* Keyframe animation for dashed line */
-@keyframes lineAnimation {
-  0% {
-      width: 0%;
-      opacity: 0;
-  }
-  100% {
-      width: 81%;
-      opacity: 1;
-  }
-}
-
   
   /* @media (min-width: 768px) {
     .steps {
@@ -1062,17 +930,7 @@ body {
     opacity: 0;
     animation: slideInTop 0.8s ease-out forwards;
   }
-  
-  @keyframes slideInTop {
-    from {
-      transform: translateY(-20px);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
+
 
   .form-container p {
     font-family: Inter;
@@ -1314,17 +1172,6 @@ body {
   .hidden {
     display: none;
   }
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(-10px); /* Slightly above the input */
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0); /* In position */
-    }
-  }
-  
   .date-picker-header {
     display: flex;
     justify-content: center;
@@ -1489,3 +1336,279 @@ body {
     border-radius: 5px;
     color: #fff;
   }
+  
+/* Keyframe for the fadeInUp animation */
+@keyframes fadeInUp {
+  0% {
+      opacity: 0;
+      transform: translateY(50px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px); /* Slightly above the input */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(); /* In position */
+  }
+}
+@keyframes fadeInAt {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes slideInTop {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Keyframes for fade-in slide-down animation */
+@keyframes fadeInSlideDown {
+  from {
+      opacity: 0;
+      transform: translateY(-20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+@keyframes fadeInSlideUp {
+  from {
+      opacity: 0;
+      transform: translateY(20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* Keyframes for pulse effect */
+@keyframes pulse {
+  0%, 100% {
+      transform: scale(1);
+  }
+  50% {
+      transform: scale(1.05);
+  }
+}
+/* Keyframes for text fade-in and slide-left */
+@keyframes fadeInSlideLeft {
+  from {
+      opacity: 0;
+      transform: translateX(-50px);
+  }
+  to {
+      opacity: 1;
+      transform: translateX(0);
+  }
+}
+
+/* Keyframes for text fade-in and slide-right */
+@keyframes fadeInSlideRight {
+  from {
+      opacity: 0;
+      transform: translateX(50px);
+  }
+  to {
+      opacity: 1;
+      transform: translateX(0);
+  }
+}
+/* Animations */
+@keyframes fadeInLeft {
+from {
+    opacity: 0;
+    transform: translateX(-50px);
+}
+to {
+    opacity: 1;
+    transform: translateX(0);
+}
+}
+
+@keyframes slideIn {
+0% {
+    opacity: 0;
+    transform: translateY(50px); /* Initial position below */
+}
+100% {
+    opacity: 1;
+    transform: translateY(0); /* Final position */
+}
+}
+/* Animation for sliding content in */
+@keyframes slideIn {
+0% {
+  opacity: 0;
+  transform: translateY(20px);
+}
+100% {
+  opacity: 1;
+  transform: translateY(0);
+}
+}
+/* Keyframe animation for dashed line */
+@keyframes lineAnimation {
+0% {
+  width: 0%;
+  opacity: 0;
+}
+100% {
+  width: 81%;
+  opacity: 1;
+}
+}
+
+
+/* Responsive styles for tablets and smartphones */
+
+@media (max-width: 768px) { /* Tablet view */
+  .header {
+    padding: 10px;
+  }
+
+  .site-name {
+    font-size: 20px; /* Slightly smaller site name */
+    margin-left: 15px;
+  }
+
+  .nav-right {
+    margin-right: 15px;
+  }
+
+  .nav-right p {
+    margin-right: 20px; /* Reduced spacing between navigation items */
+    font-size: 12px; /* Slightly smaller font size */
+  }
+
+  .social-buttons {
+    gap: 5px; /* Reduced gap between buttons */
+  }
+
+  .circle-button {
+    width: 28px;
+    height: 28px;
+    font-size: 13px; /* Reduced button size */
+  }
+}
+
+@media (max-width: 480px) { /* Smartphone view */
+  .header {
+    padding: 5px;
+  }
+
+  .site-name {
+    font-size: 20px; /* Further reduced site name size */
+    margin-left: 10px;
+  }
+
+  .nav-right {
+    margin-right: 10px;
+  }
+
+  .nav-right p {
+    margin-right: 15px; /* Further reduced spacing */
+    font-size: 12px; /* Smaller font size */
+  }
+
+  .social-buttons {
+    gap: 3px; /* Smaller gap between buttons */
+  }
+
+  .circle-button {
+    width: 24px;
+    height: 24px; /* Further reduced button size */
+    font-size: 13px;
+  }
+}
+/* Responsive styles for the .home section */
+@media (max-width: 768px) { /* Tablet view */
+  .home {
+    height: auto; /* Adjust height to fit content */
+    padding: 20px; /* Add padding for better spacing */
+    flex-wrap: wrap; /* Allow content to wrap */
+  }
+
+  .home-left {
+    width: 100%; /* Full width for the left content */
+    margin-left: 0; /* Remove extra left margin */
+    margin-top: 20px; /* Add spacing at the top */
+    text-align: center; /* Center-align text */
+  }
+
+  .home-t-1 {
+    font-size: 36px; /* Reduce title size */
+    line-height: 50px;
+  }
+
+  .home-t-2 {
+    font-size: 28px; /* Reduce subtitle size */
+    line-height: 40px;
+  }
+
+  .home-btn {
+    width: 180px; /* Reduce button width */
+    height: 40px; /* Reduce button height */
+    font-size: 18px; /* Adjust font size */
+    margin-top: 30px; /* Add spacing from text */
+  }
+
+  .img-div img {
+    width: 100%; /* Make image responsive */
+    height: auto; /* Maintain aspect ratio */
+    margin: 20px auto 0 auto; /* Center the image with margin */
+  }
+}
+
+@media (max-width: 480px) { /* Smartphone view */
+  .home {
+    flex-direction: column; /* Stack content vertically */
+    align-items: center; /* Center align items */
+  }
+
+  .home-left {
+    margin-top: 10px; /* Reduce top margin */
+  }
+
+  .home-t-1 {
+    font-size: 28px; /* Further reduce title size */
+    line-height: 40px;
+  }
+
+  .home-t-2 {
+    font-size: 22px; /* Further reduce subtitle size */
+    line-height: 32px;
+  }
+
+  .home-btn {
+    width: 160px; /* Further reduce button width */
+    height: 36px; /* Further reduce button height */
+    font-size: 16px; /* Adjust font size */
+  }
+  .img-div{
+    margin: auto;
+  }
+  .img-div img {
+    width: 90%; /* Limit image width */
+    margin-left: 1rem;
+    margin-top: 30px; /* Reduce top margin */
+    margin-bottom: 40px;
+  }
+}
