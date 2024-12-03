@@ -250,11 +250,11 @@
                 <div class="form-group">
                 <div class="main-label">フルネームを記入してください *</div>
                 <div class="name-fields">
-                    <div style="width: 50%;">
+                    <div >
                         <label for="first-name">First Name</label>
                         <input type="text" id="first-name" required>
                     </div>
-                    <div style="width: 50%;">
+                    <div >
                         <label for="surname">Surname</label>
                         <input type="text" id="surname" required>
                     </div>
@@ -326,7 +326,17 @@
                 <!-- Submit Button -->
                 <button type="submit" class="submit-btn">お問い合わせ</button>
             </form>
-    </div> 
+    </div>
+    <footer class="footer">
+        <div class="social-icons">
+          <a href="#" class="icon"><span class="fab fa-twitter"></span></a>
+          <a href="#" class="icon"><span class="fab fa-facebook-f"></span></a>
+          <a href="#" class="icon"><span class="fab fa-instagram"></span></a>
+        </div>
+        <p class="copyright">
+          Copyright © 2024 K5-safari. All rights reserved.
+        </p>
+    </footer>
     <script>
       document.getElementById('contactForm').addEventListener('submit', function(event) {
           event.preventDefault(); // Prevent form from reloading the p
@@ -475,15 +485,5 @@
         generateTimeOptions(currentPeriod);
 
     </script>
-    <footer class="footer">
-            <div class="social-icons">
-              <a href="#" class="icon"><span class="fab fa-twitter"></span></a>
-              <a href="#" class="icon"><span class="fab fa-facebook-f"></span></a>
-              <a href="#" class="icon"><span class="fab fa-instagram"></span></a>
-            </div>
-            <p class="copyright">
-              Copyright © 2024 K5-safari. All rights reserved.
-            </p>
-    </footer>
 </body>
 </html>

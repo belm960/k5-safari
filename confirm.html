@@ -113,6 +113,80 @@
       background: url('https://i.imgur.com/JTOU1nx.png') no-repeat center bottom;
       background-size: contain;
     }
+
+    /* Tablet styles */
+@media (max-width: 768px) {
+    .confirm-box {
+        width: 90%;
+        height: auto;
+        padding: 20px 15px;
+    }
+
+    .confirm-box h1 {
+        font-size: 24px;
+        line-height: 32px;
+        margin-bottom: 15px;
+    }
+
+    .details {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .list {
+        flex-direction: column;
+        text-align: left;
+    }
+
+    .title-confirm, .text-confirm {
+        width: 100%;
+        text-align: left;
+        font-size: 14px;
+    }
+
+    .button {
+        font-size: 14px;
+        padding: 5px 20px;
+    }
+
+    .background {
+        height: 100px;
+    }
+}
+
+/* Mobile styles */
+@media (max-width: 480px) {
+    .confirm-box {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .confirm-box h1 {
+        font-size: 20px;
+        line-height: 28px;
+    }
+
+    .details {
+        width: 100%;
+    }
+
+    .list {
+        margin-bottom: 10px;
+    }
+
+    .title-confirm, .text-confirm {
+        font-size: 12px;
+    }
+
+    .button {
+        font-size: 12px;
+        padding: 5px 15px;
+    }
+
+    .background {
+        height: 80px;
+    }
+}
     </style>
 </head>
 <body>

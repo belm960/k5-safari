@@ -10,71 +10,131 @@
     <link href="index.css" rel="stylesheet">
     <script src="https://apis.google.com/js/api.js"></script>
     <style>
-        .thank-box {
-            display: flex;
-            height: 90vh;
-        }
-        .left-section {
-            flex: 1;
-            background: linear-gradient(#FF7458ED,#FF7458ED),url(img/thankbg.png);
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-        .left-section .content-thank h1 {
-            width: 70%;
-            margin: auto;
-            color: white;
-            margin-bottom: 30px;
-            font-family: Inter;
-            font-size: 32px;
-            font-weight: 500;
-            line-height: 44.13px;
-            text-align: center;
-            justify-content: space-between;
-            text-underline-position: from-font;
-            text-decoration-skip-ink: none;
-        }
-        .btn {
-            background: #FFF8E8;
-            color: #FF7458;
-            border: 1.5px solid #E8B133;
-            padding: 10px 40px;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: Inter;
-            font-weight: 500;
-            line-height: 26.04px;
-            text-align: center;
-            text-underline-position: from-font;
-            text-decoration-skip-ink: none;
+/* Base styles remain unchanged */
+.thank-box {
+    display: flex;
+    height: 90vh;
+}
 
-        }
-        .btn:hover {
-            background-color: #f5a585;
-            color: white;
-        }
-        .right-section {
-            flex: 1;
-            background: url(img/thank.jpg) no-repeat center center/cover;
-            position: relative;
-        }
-        .right-section .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.4));
-        }
+.left-section {
+    flex: 1;
+    background: linear-gradient(#FF7458ED, #FF7458ED), url(img/thankbg.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.left-section .content-thank h1 {
+    width: 70%;
+    margin: auto;
+    color: white;
+    margin-bottom: 30px;
+    font-family: Inter;
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 44.13px;
+    text-align: center;
+    justify-content: space-between;
+}
+
+.btn {
+    background: #FFF8E8;
+    color: #FF7458;
+    border: 1.5px solid #E8B133;
+    padding: 10px 40px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: Inter;
+    font-weight: 500;
+    line-height: 26.04px;
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: #f5a585;
+    color: white;
+}
+
+.right-section {
+    flex: 1;
+    background: url(img/thank.jpg) no-repeat center center/cover;
+    position: relative;
+}
+
+.right-section .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.4));
+}
+
+/* Tablet styles */
+@media (max-width: 768px) {
+    .thank-box {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .left-section, .right-section {
+        flex: none;
+        width: 100%;
+        height: 50vh;
+    }
+
+    .left-section .content-thank h1 {
+        width: 90%;
+        font-size: 24px;
+        line-height: 34px;
+    }
+
+    .btn {
+        font-size: 14px;
+        padding: 8px 30px;
+    }
+}
+
+/* Smartphone styles */
+@media (max-width: 480px) {
+    .thank-box {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .left-section, .right-section {
+        flex: none;
+        width: 100%;
+        padding: 15px;
+    }
+    .right-section{
+       height: 50vh;
+    }
+
+    .left-section .content-thank h1 {
+        font-size: 20px;
+        line-height: 30px;
+        margin-bottom: 20px;
+    }
+
+    .btn {
+        font-size: 12px;
+        padding: 7px 25px;
+    }
+
+    .right-section .overlay {
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(255, 255, 255, 0));
+    }
+}
+
     </style>
 </head>
 <body>

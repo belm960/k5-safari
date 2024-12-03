@@ -31,6 +31,7 @@
 body {
   width: 100%;
   height: 100%;
+  overflow-x: hidden;
   background: #FFFDF5;
   margin: 0;
   padding: 0;
@@ -479,6 +480,8 @@ body {
 .content p:hover {
     color: #D95A2C; /* Hover effect added */
 }
+
+
 /* Container styles */
 .container {
     text-align: center;
@@ -559,6 +562,7 @@ body {
     opacity: 1 !important;
     transform: translateY(0px) !important;
 }
+
 /* .z-dance container styles */
 .z-dance {
   display: flex;
@@ -661,6 +665,8 @@ body {
     margin-bottom: 100px;
     transform: translateY(50px);
     animation: fadeInUp 0.8s forwards; /* Animation for the testimonials section */
+    width: 100%;
+    overflow-x: hidden;
   }
   
   .testimonials h1 {
@@ -763,6 +769,8 @@ body {
   .av-img:hover {
     transform: scale(1.1); /* Slight zoom effect */
   }
+
+
 /* Process Flow Section */
 .process-flow {
   position: relative;
@@ -1002,6 +1010,9 @@ body {
   }
   .name-fields input {
     flex: 1;
+  }
+  .name-fields div{
+    width: 50%;
   }
   
   /* Date Fields */
@@ -1776,4 +1787,655 @@ to {
     height: auto;
   }
 }
+/* Tablet and smartphone styles */
+@media (max-width: 768px) { /* Tablets */
+  /* .container-vision {
+    flex-direction: column;
+    padding: 10px 20px;
+    padding-bottom: 60px;
+  }
 
+  .images-vision {
+    width: 100%; 
+    margin-bottom: 20px; 
+    animation: none; 
+  }
+
+  .left-image {
+    margin-top: 20px; 
+    width: 100%; 
+    height: auto; 
+    border-radius: 4px;
+  } */
+
+  .top-right-image {
+    left: 100px;
+    border-radius: 4px;
+  } 
+
+  .content {
+    margin-top: 0; /* Remove top margin */
+    margin-left: 0; /* Remove left margin */
+    padding: 0; /* Remove padding */
+    text-align: center; /* Center-align text */
+  }
+
+  .content h1 {
+    font-size: 28px; /* Adjust heading size */
+    line-height: 38px;
+    text-align: center; /* Center heading */
+  }
+
+  .content p {
+    font-size: 16px; /* Adjust paragraph size */
+    line-height: 28px;
+    text-align: center; /* Center-align text */
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 480px) { /* Smartphones */
+  .container-vision {
+    padding: 10px; 
+    padding-bottom: 40px;
+  }
+
+  .left-image{
+    width: 70%; 
+    height: auto; 
+    margin-top: 30%; 
+    margin-left: 20px;
+  }
+  .top-right-image {
+    width: 70%; 
+    height: auto; 
+    margin-top: 10px; 
+  }
+
+  .content h1 {
+    font-size: 24px; /* Smaller heading size */
+    line-height: 34px;
+    margin-top: 30px;
+  }
+
+  .content p {
+    font-size: 14px; /* Smaller paragraph size */
+    line-height: 24px;
+    margin-bottom: 10px;
+  }
+
+}
+
+/* Tablet and smartphone styles */
+@media (max-width: 768px) { /* Tablets */
+  .container {
+    padding: 0 20px; /* Reduce padding for smaller screens */
+  }
+
+  .title {
+    margin: 0px 20px 40px 20px; /* Reduce margins */
+    font-size: 20px; /* Adjust font size */
+    line-height: 30px; /* Adjust line height */
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr); /* Display 2 columns */
+    gap: 10px; /* Reduce gap between items */
+  }
+
+  .item {
+    width: 100%; /* Make items responsive */
+    height: auto; /* Adjust height to content */
+  }
+
+  .grid-item p {
+    font-size: 18px; /* Adjust font size */
+    line-height: 28px; /* Adjust line height */
+  }
+}
+
+@media (max-width: 480px) { /* Smartphones */
+  .container {
+    padding: 0 10px; /* Further reduce padding */
+  }
+
+  .title {
+    margin: 0px 10px 30px 10px; /* Further reduce margins */
+    font-size: 18px; /* Smaller font size */
+    line-height: 26px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(1, 1fr); /* Single column layout */
+    gap: 10px; /* Maintain consistent spacing */
+  }
+
+  .item {
+    width: 100%; /* Full width for items */
+    height: auto; /* Maintain aspect ratio */
+  }
+
+  .grid-item p {
+    font-size: 16px; /* Smaller font size */
+    line-height: 24px;
+    padding-top: 20px; /* Adjust spacing */
+  }
+}
+/* Tablet and smartphone styles */
+@media (max-width: 768px) { /* Tablets */
+  .z-dance {
+    flex-wrap: wrap; /* Stack items */
+    padding: 50px 30px; /* Reduce padding */
+    gap: 50px; /* Adjust gap between items */
+    margin-bottom: 50px; /* Reduce bottom margin */
+  }
+
+  .content-dance {
+    flex: 1 1 100%; /* Full width for content */
+    text-align: center; /* Center-align text */
+    animation: fadeInUp 0.8s forwards 0.3s; /* Maintain animation */
+  }
+
+  .content-dance h2 {
+    font-size: 20px; /* Adjust font size */
+    line-height: 30px; /* Adjust line height */
+  }
+
+  .content-dance p {
+    font-size: 16px; /* Adjust font size */
+    line-height: 28px; /* Adjust line height */
+  }
+
+  .image-dance {
+    flex: 1 1 100%; /* Full width for image */
+    text-align: center; /* Center-align image */
+    animation: fadeInUp 0.8s forwards 0.7s; /* Maintain animation */
+  }
+
+  .image-dance img {
+    width: 100%; /* Responsive width */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 300px; /* Optional max width for tablets */
+  }
+}
+
+@media (max-width: 480px) { /* Smartphones */
+  .z-dance {
+    padding: 30px 15px; /* Further reduce padding */
+    gap: 30px; /* Adjust gap for smaller screens */
+    margin-bottom: 30px; /* Further reduce bottom margin */
+  }
+
+  .content-dance {
+    text-align: left; /* Align text to left for better readability */
+  }
+
+  .content-dance h2 {
+    font-size: 18px; /* Smaller font size */
+    line-height: 26px; /* Adjust line height */
+  }
+
+  .content-dance p {
+    font-size: 14px; /* Smaller font size */
+    line-height: 24px; /* Adjust line height */
+  }
+
+  .image-dance img {
+    max-width: 250px; /* Smaller max width for smartphones */
+  }
+}
+/* Responsive Styles for Testimonials Section */
+@media (max-width: 1024px) { /* Tablet */
+  .testimonials {
+    padding: 15px;
+    margin-bottom: 80px;
+  }
+
+  .testimonials h1 {
+    font-size: 32px;
+    line-height: 42px;
+  }
+
+  .testimonials p {
+    font-size: 18px;
+    line-height: 28px;
+    width: 70%; /* Reduce width for readability */
+  }
+
+  .cards {
+    gap: 15px;
+  }
+
+  .card {
+    width: 320px;
+    height: auto; /* Allow cards to adjust height */
+    padding: 30px;
+  }
+
+  .card p {
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  .card span {
+    font-size: 17px;
+  }
+
+  .avatar {
+    width: 90px;
+    height: 90px;
+  }
+
+  .av-img {
+    width: 90px;
+    height: 90px;
+  }
+}
+
+@media (max-width: 768px) { /* Mobile */
+  .testimonials {
+    padding: 10px;
+    margin-bottom: 60px;
+  }
+
+  .testimonials h1 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  .testimonials p {
+    font-size: 16px;
+    line-height: 24px;
+    width: 90%; /* Full width for better readability */
+  }
+
+  .cards {
+    gap: 10px;
+    flex-direction: column; /* Stack cards vertically */
+    align-items: center;
+  }
+
+  .card {
+    width: 100%; /* Full width for smaller screens */
+    max-width: 300px; /* Limit maximum width */
+    height: auto; /* Adjust height dynamically */
+    padding: 20px;
+  }
+
+  .card p {
+    font-size: 15px;
+    line-height: 24px;
+  }
+
+  .card span {
+    font-size: 16px;
+  }
+
+  .avatar {
+    width: 80px;
+    height: 80px;
+  }
+
+  .av-img {
+    width: 80px;
+    height: 80px;
+  }
+}
+/* Responsive Styles for Extra Small Smartphones */
+@media (max-width: 468px) {
+  .testimonials {
+    padding: 5px; /* Reduce padding for smaller screens */
+    margin-bottom: 30px;
+  }
+
+  .testimonials h1 {
+    font-size: 20px;
+    line-height: 28px;
+    margin-bottom: 15px;
+  }
+
+  .testimonials p {
+    font-size: 12px;
+    line-height: 18px;
+    width: 100%; /* Full width for better readability */
+    margin-bottom: 30px;
+  }
+
+  .cards {
+    gap: 8px; /* Reduce space between cards */
+    flex-direction: column; /* Stack cards vertically */
+    align-items: center;
+  }
+
+  .card {
+    width: 100%; /* Full width for smaller screens */
+    max-width: 250px; /* Restrict max width for better scaling */
+    height: auto; /* Allow height to adjust dynamically */
+    padding: 10px;
+    border-radius: 3px; /* Slightly smaller rounded corners */
+  }
+
+  .card p {
+    font-size: 12px;
+    line-height: 18px;
+    margin: 15px 0;
+  }
+
+  .card span {
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  .avatar {
+    width: 60px;
+    height: 60px;
+  }
+
+  .av-img {
+    width: 60px;
+    height: 60px;
+  }
+}
+/* Responsive Styles */
+@media (max-width: 1024px) { /* Tablets */
+  .process-flow {
+    padding: 60px 20px;
+  }
+
+  .process-flow h1 {
+    font-size: 28px;
+    line-height: 34px;
+    margin-bottom: 50px;
+  }
+
+  .steps {
+    flex-wrap: wrap; /* Allow steps to wrap */
+    justify-content: center; /* Center the steps */
+    gap: 20px;
+  }
+
+  .step {
+    max-width: 120px; /* Reduce step width */
+    gap: 8px;
+  }
+
+  .step h2 {
+    font-size: 16px;
+    line-height: 22px;
+    margin: 30px 0 8px;
+  }
+
+  .step p {
+    font-size: 14px;
+    line-height: 24px;
+    text-align: center; /* Center-align text */
+  }
+
+  .line-1 {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) { /* Small Tablets and Large Phones */
+  .process-flow {
+    padding: 50px 15px;
+  }
+
+  .process-flow h1 {
+    font-size: 24px;
+    line-height: 30px;
+    margin-bottom: 40px;
+  }
+
+  .steps {
+    gap: 15px;
+  }
+
+  .step {
+    max-width: 100px; /* Narrower steps */
+    gap: 6px;
+  }
+
+  .step .circle {
+    width: 55px;
+    height: 55px;
+    font-size: 20px;
+    line-height: 20px;
+  }
+
+  .step h2 {
+    font-size: 14px;
+    line-height: 20px;
+    margin: 20px 0 6px;
+  }
+
+  .step p {
+    font-size: 13px;
+    line-height: 20px;
+  }
+
+  .line-1 {
+    display: none;
+  }
+}
+
+@media (max-width: 468px) { /* Mobile Phones */
+  .process-flow {
+    padding: 40px 10px;
+  }
+
+  .process-flow h1 {
+    font-size: 20px;
+    line-height: 26px;
+    margin-bottom: 30px;
+  }
+
+  .steps {
+    flex-direction: column; /* Stack steps vertically */
+    align-items: center;
+    gap: 10px;
+  }
+
+  .step {
+    max-width: 90%; /* Full width for steps */
+  }
+
+  .step .circle {
+    width: 50px;
+    height: 50px;
+    font-size: 18px;
+    line-height: 18px;
+  }
+
+  .step h2 {
+    font-size: 14px;
+    line-height: 18px;
+    margin: 15px 0 5px;
+  }
+
+  .step p {
+    font-size: 12px;
+    line-height: 18px;
+    text-align: center;
+  }
+
+  .line-1 {
+    display: none;
+  }
+}
+
+/* General adjustments for smaller screens */
+@media (max-width: 1024px) {
+  /* Adjust padding and width for tablets */
+  .form-container {
+    padding: 30px 10%;
+  }
+  .date-fields input{
+    border: none;
+  }
+
+  .form-container h1 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  .form-container p {
+    font-size: 17px;
+    line-height: 26px;
+    max-width: 80%;
+  }
+
+  .name-fields {
+    flex-direction: column; /* Stack fields vertically */
+    gap: 15px;
+  }
+  .name-fields div{
+    width: 100%;
+  }
+
+  .date-fields {
+    flex-direction: column; /* Stack fields vertically */
+    gap: 15px;
+  }
+
+  textarea {
+    height: 200px; /* Adjust for smaller screens */
+  }
+}
+
+/* For smaller mobile screens */
+@media (max-width: 768px) {
+  /* Reduce padding and margin */
+  .form-container {
+    padding: 20px 5%;
+    margin: 0px 0;
+  }
+
+  .form-container h1 {
+    font-size: 24px;
+    line-height: 32px;
+  }
+  .name-fields div{
+    width: 100%;
+  }
+
+  .form-container p {
+    font-size: 16px;
+    line-height: 24px;
+    max-width: 90%;
+  }
+
+  .form-group label {
+    font-size: 14px;
+  }
+  .date-fields input{
+    border: none;
+  }
+
+  input, textarea, select {
+    font-size: 14px;
+    height: 50px;
+  }
+
+  textarea {
+    height: 150px;
+  }
+
+  .submit-btn {
+    width: 100%; /* Full width for smaller screens */
+    height: 50px;
+    font-size: 16px;
+  }
+}
+
+/* For very small devices (mobile phones) */
+@media (max-width: 480px) {
+  .form-container {
+    padding: 15px 3%;
+  }
+
+  .form-container h1 {
+    font-size: 22px;
+    line-height: 30px;
+  }
+
+  .form-container p {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .name-fields, .date-fields {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .date-fields input{
+    border: none;
+  }
+
+  input, textarea {
+    width: 100%;
+    height: 45px;
+    font-size: 14px;
+  }
+
+  textarea {
+    height: 120px;
+  }
+
+  .submit-btn {
+    height: 45px;
+    font-size: 14px;
+  }
+  .time-dropdown{
+    width: 100%;
+    top: 240px;
+  }
+  .date-picker-dropdown{
+    width: 100%;
+    top: 160px;
+  }
+}
+
+
+/* Tablet styles */
+@media (max-width: 768px) {
+  .footer {
+      flex-direction: column;
+      height: auto;
+      padding: 20px 15px;
+      text-align: center;
+  }
+
+  .social-icons {
+      margin-bottom: 10px;
+  }
+
+  .footer .social-icons .icon {
+      width: 35px;
+      height: 35px;
+      font-size: 20px;
+  }
+}
+
+/* Mobile styles */
+@media (max-width: 480px) {
+  .footer {
+      padding: 15px;
+  }
+
+  .social-icons {
+      justify-content: center;
+      gap: 10px;
+  }
+
+  .footer .social-icons .icon {
+      width: 30px;
+      height: 30px;
+      font-size: 18px;
+  }
+
+  .copyright {
+      font-size: 14px;
+  }
+}
