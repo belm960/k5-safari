@@ -4,6 +4,9 @@
   padding: 0;
   box-sizing: border-box;
 }
+html {
+  scroll-behavior: smooth;
+}
 /* General scrollbar styling */
 ::-webkit-scrollbar {
   width: 8px; /* Width of the scrollbar */
@@ -164,6 +167,7 @@ body {
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
   transition: transform 0.3s ease, opacity 0.3s ease;
+  margin-bottom: 20px;
 }
 
 .home-t-2:hover {
@@ -176,6 +180,7 @@ body {
   margin-top: 40px;
   width: 200px;
   height: 45px;
+  padding: 5px 20px;
   background: #FF6243;
   border: 2.5px solid #EFDA95;
   border-radius: 100px;
@@ -188,6 +193,7 @@ body {
   text-align: center;
   justify-content: center;
   color: #FFFFFF;
+  text-decoration: none;
   transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
 }
 
@@ -358,7 +364,8 @@ body {
 /* Button styling with hover */
 .service-btn {
   width: 185px;
-  height: 45px;
+  padding: 5px 20px;
+  align-items: center;
   border-radius: 100px;
   border: 2px solid #F1D371;
   color: #D95A2C;
@@ -369,6 +376,7 @@ body {
   text-align: center;
   background: #FDE1A0;
   cursor: pointer;
+  text-decoration: none;
   transition: all 0.3s ease;
 }
 
@@ -484,6 +492,7 @@ body {
 
 /* Container styles */
 .container {
+    width: 100%;
     text-align: center;
     margin: 0 auto;
     padding: 0 120px;
@@ -506,14 +515,14 @@ body {
 .grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 15px;
+    gap: 10px;
     margin: 0px 15px;
 }
 
 /* Item styles */
 .item {
     display: flex;
-    width: 195px;
+    width: 100%;
     height: 195px;
     border-radius: 5px;
     align-items: center;
@@ -1575,13 +1584,14 @@ to {
   .home-t-2 {
     font-size: 28px; /* Reduce subtitle size */
     line-height: 40px;
+    margin-bottom: 20px;
   }
 
   .home-btn {
     width: 180px; /* Reduce button width */
-    height: 40px; /* Reduce button height */
-    font-size: 18px; /* Adjust font size */
-    margin-top: 30px; /* Add spacing from text */
+    height: 35px; /* Reduce button height */
+    font-size: 14px; /* Adjust font size */
+    margin-top: 40px; /* Add spacing from text */
   }
 
   .img-div img {
