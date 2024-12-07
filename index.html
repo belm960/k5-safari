@@ -251,12 +251,12 @@
                 <div class="main-label">フルネームを記入してください *</div>
                 <div class="name-fields">
                     <div >
-                        <label for="first-name">First Name</label>
-                        <input type="text" id="first-name" required>
-                    </div>
-                    <div >
                         <label for="surname">Surname</label>
                         <input type="text" id="surname" required>
+                    </div>
+                    <div >
+                        <label for="first-name">First Name</label>
+                        <input type="text" id="first-name" required>
                     </div>
                 </div>
                 </div>
@@ -309,7 +309,7 @@
                 <div class="time-dropdown">
                     <div class="time-header">
                       <div class="time-nav prev" style="cursor: pointer; margin-right: 20px; color:#0B4E6C;">◀</div>
-                      <span class="time-period">PM</span>
+                      <span class="time-period">午後</span>
                       <div class="time-nav next" style="cursor: pointer; margin-left: 20px; color:#0B4E6C;">▶</div>
                     </div>
                     <div class="time-options">
@@ -319,9 +319,9 @@
                 </div>
                 <!-- Message -->
                 <div class="form-group" style="z-index: 1;">
-                <label for="message" style="z-index: 1;">お問い合わせ内容 (Message)</label>
-                <div class="date-txt" style="z-index: 1;">質問やリクエスト、健康上の注意点や、配慮が必要な事項があればこちらにご記入ください。</div>
-                <textarea id="message" rows="5" style="z-index: 1;"></textarea>
+                    <label for="message" style="z-index: 1;">お問い合わせ内容 (Message)</label>
+                    <div class="date-txt" style="z-index: 1;">質問やリクエスト、健康上の注意点や、配慮が必要な事項があればこちらにご記入ください。</div>
+                    <textarea id="message" rows="5" style="z-index: 1;"></textarea>
                 </div>
                 <!-- Submit Button -->
                 <button type="submit" class="submit-btn">お問い合わせ</button>
@@ -338,14 +338,24 @@
         </p>
     </footer>
     <script>
+        function parseDateString(dateString) {
+            // Split the date and time components
+            const [datePart, timePart] = dateString.split(", ");
+            const [year, month, day] = datePart.split("-");
+            const [time, period] = timePart.split(" ");
+            const [hour, minute] = time.split(":");
+            
+            // Format the result
+            return `${year}年${month}月${day}日 ${period}${parseInt(hour)}時`;
+        };
       document.getElementById('contactForm').addEventListener('submit', function(event) {
           event.preventDefault(); // Prevent form from reloading the p
           // Collect form data
           const templateParams = {
-              fullName: document.getElementById('first-name').value+ " " + document.getElementById('surname').value,
+              fullName: document.getElementById('surname').value + " " + document.getElementById('first-name').value,
               email: document.getElementById('email').value,
               phone: document.getElementById('phone').value,
-              date: document.getElementById('date').value + ", " + document.getElementById('time').value,
+              date: parseDateString(document.getElementById('date').value + ", " + document.getElementById('time').value),
               message: document.getElementById('message').value
           };
           // Store the object in localStorage
@@ -435,12 +445,12 @@
         const inputField = document.querySelector(".time-field input");
 
         let isDropdownVisible = false;
-        let currentPeriod = "PM";
+        let currentPeriod = "午後";
 
         // Generate time options
         function generateTimeOptions(period) {
         timeOptionsContainer.innerHTML = ""; // Clear previous options
-        const startHour = period === "AM" ? 0 : 12; // Start at 12:00 for PM
+        const startHour = period === "午前" ? 0 : 12; // Start at 12:00 for PM
         const endHour = startHour + 12;
 
         for (let hour = startHour; hour < endHour; hour++) {
