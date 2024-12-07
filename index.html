@@ -381,8 +381,18 @@
         const nextMonthButton = document.querySelector(".next-month");
 
         // Show/Hide the dropdown
-        datePickerTrigger.addEventListener("click", () => {
-        datePickerDropdown.classList.toggle("hidden");
+        datePickerTrigger.addEventListener("click", (event) => {
+            // Stop the event from propagating to the document click listener
+            event.stopPropagation();
+            datePickerDropdown.classList.toggle("hidden");
+        });
+
+        // Hide the dropdown when clicking outside
+        document.addEventListener("click", (event) => {
+            // Check if the click is outside the date picker dropdown and trigger
+            if (!datePickerDropdown.contains(event.target) && !datePickerTrigger.contains(event.target)) {
+                datePickerDropdown.classList.add("hidden");
+            }
         });
 
         // Populate the calendar with days
@@ -475,8 +485,28 @@
 
         // Toggle dropdown visibility
         function toggleDropdown() {
-        isDropdownVisible = !isDropdownVisible;
-        timeDropdown.classList.toggle("active", isDropdownVisible);
+            isDropdownVisible = !isDropdownVisible;
+            timeDropdown.classList.toggle("active", isDropdownVisible);
+
+            if (isDropdownVisible) {
+                // Add a click listener to the document to detect outside clicks
+                document.addEventListener("click", handleOutsideClick);
+            } else {
+                // Remove the click listener when dropdown is hidden
+                document.removeEventListener("click", handleOutsideClick);
+            }
+        }
+
+        function handleOutsideClick(event) {
+            // Check if the click is outside the dropdown and trigger
+            if (!timeDropdown.contains(event.target) && !timeField.contains(event.target)) {
+                console.log(isDropdownVisible)
+                isDropdownVisible = false;
+                timeDropdown.classList.remove("active");
+
+                // Remove the event listener after hiding the dropdown
+                document.removeEventListener("click", handleOutsideClick);
+            }
         }
 
         // Change time period
