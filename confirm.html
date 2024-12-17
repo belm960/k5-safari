@@ -23,7 +23,6 @@
         overflow: hidden;
         text-align: center;
         width: 80%; 
-        height: 80vh; 
         margin: 30px auto; 
         padding: 30px 0;
     }
@@ -228,7 +227,7 @@
                 <div class="text-confirm"></div>
             </div>
         </div>
-        <a id="confirm-btn" class="button">詳細を確認します</a>
+        <a id="confirm-btn" class="button" onclick="sendEmail()">詳細を確認します</a>
         <br>
     </div>
     <footer class="footer">
@@ -244,48 +243,57 @@
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     
     <script>
-    // Initialize EmailJS
-    emailjs.init("3OpFJddHcfGQA1_rK"); // Replace with your EmailJS User ID
-            
-    // Retrieve the object from localStorage
-    const retrievedData = localStorage.getItem('templateParams');
-
-    // Parse the JSON string into an object
-    const parsedData = JSON.parse(retrievedData);
     
-    // Select all elements with the `text-confirm` class
-    const textElements = document.querySelectorAll('.text-confirm');
+        // Retrieve the object from localStorage
+        const retrievedData = localStorage.getItem('templateParams');
 
-    // Map object keys to elements (assumes elements follow the same naming as keys)
-    Object.keys(parsedData).forEach((key, index) => {
-        // Safely update elements
-        if (textElements[index]) {
-            textElements[index].innerHTML = parsedData[key];
-        }
-    });
+        // Select all elements with the `text-confirm` class
+        const textElements = document.querySelectorAll('.text-confirm');
 
-    // Form submission event
-    document.getElementById('confirm-btn').addEventListener('click', function(event) {
-        event.preventDefault(); // Prevent form from reloading the page
+        // Parse the JSON string into an object
+        const parsedData = JSON.parse(retrievedData);
+        
+        // Map object keys to elements (assumes elements follow the same naming as keys)
+        Object.keys(parsedData).forEach((key, index) => {
+            // Safely update elements
+            if (textElements[index]) {
+                textElements[index].innerHTML = parsedData[key];
+            }
+        });
+    function sendEmail() {
 
-        // Send the email using EmailJS
-        if(parsedData){
-            emailjs.send("service_u6oxre9","template_53rwoc8", parsedData)
-            .then(function(response) {
-                emailjs.send("service_u6oxre9","template_budz30c", parsedData)
-                .then(function(response) {
-                    window.location.href="./thankyou.html"
-                    localStorage.removeItem('templateParams');
-                }, function(error) {
-                    alert("Failed to send email. Please try again later.");
-                    console.error("Error:", error);
-                });
-            }, function(error) {
-                alert("Failed to send email. Please try again later.");
-                console.error("Error:", error);
+        const name = parsedData.fullName
+        const email = parsedData.email
+        const date = parsedData.date
+        const phone = parsedData.phone
+        const message = parsedData.message
+        console.log(JSON.stringify({ name: parsedData.fullName, 
+                    email: parsedData.email, 
+                    phone: parsedData.phone, 
+                    date: parsedData.date, 
+                    message: parsedData.message }))
+        console.log("samimiii")
+            // Send data to the PHP script using Fetch API
+            fetch('send_email.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name: parsedData.fullName, 
+                    email: parsedData.email, 
+                    phone: parsedData.phone, 
+                    date: parsedData.date, 
+                    message: parsedData.message })
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log(data);
+                if (data.includes("success")) {
+                    window.location.href = "thankyou.html"; // Redirect to thank-you page
+                }
+            })
+            .catch(error => {
+                console.log("Failed to send email: " + error.message);
             });
         }
-    });
     </script>
 </body>
 </html>
