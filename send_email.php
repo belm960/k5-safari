@@ -41,19 +41,19 @@ if ($data) {
     try {
         // Server settings
         $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com'; // Use your SMTP server
+        $mail->Host = 'sv16274.xserver.jp'; // Use your SMTP server
         $mail->SMTPAuth = true;
-        $mail->Username = 'sawerkit23@gmail.com'; // Your email
-        $mail->Password = 'rpco rcfn ykcl nsnt'; // Your email password
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port = 587;
+        $mail->Username = 'info@k5-safari1.com'; // Your email
+        $mail->Password = 'K5-Safari2024'; // Your email password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        $mail->Port = 465;
 
         // Recipients
         $mail->setFrom($from, $nameFrom);
         $mail->addAddress($to);
 
         // Content
-        $mail->isHTML(false);
+        $mail->isHTML(true);
         $mail->Subject = $subject;
         $mail->Body = $body;
 
