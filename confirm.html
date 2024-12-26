@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link href="index.css" rel="stylesheet">
     <script src="https://apis.google.com/js/api.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
 
     .confirm-box {
@@ -23,7 +24,7 @@
         overflow: hidden;
         text-align: center;
         width: 80%; 
-        height: 80vh;
+        height: 80vh; 
         margin: 30px auto; 
         padding: 30px 0;
     }
@@ -86,26 +87,46 @@
     }
 
     .button {
-        display: inline-block;
-        margin-top: 20px;
-        padding: 7px 30px;
-        font-size: 16px;
-        background: #FDE1A0;
-        border-radius: 30px;
-        border: 2px solid #F1D371;
-        font-family: Inter;
-        font-weight: 500;
-        line-height: 18.56px;
-        text-align: center;
-        text-decoration: none;
-        color: #D95A2C;
-        transition: transform 0.5s smooth;
-        cursor: pointer;
-    }
+            display: inline-block;
+            margin-top: 20px;
+            padding: 7px 30px;
+            font-size: 16px;
+            background: #FDE1A0;
+            border-radius: 30px;
+            border: 2px solid #F1D371;
+            font-family: Inter;
+            font-weight: 500;
+            text-align: center;
+            color: #D95A2C;
+            cursor: pointer;
+            position: relative;
+        }
 
+
+    .button.loading::after {
+            content: "";
+            width: 15px;
+            height: 15px;
+            border: 2px solid #D95A2C;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            position: absolute;
+            top: 20%;
+            right: 45%;
+            transform: translate(-50%, -50%);
+        }
     .button:hover {
       background: #fce8b9;
       transform: scale(1.05);
+    }
+    @keyframes spin {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
     }
 
     /* Tablet styles */
@@ -184,7 +205,6 @@
 }
     </style>
 </head>
-<body>
     <div class="header">
         <h1 class="site-name">K5-safari</h1>
         <div class="nav-right">
@@ -241,58 +261,68 @@
           Copyright © 2024 K5-safari. All rights reserved.
         </p>
     </footer>
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script>
-    
-        // Retrieve the object from localStorage
         const retrievedData = localStorage.getItem('templateParams');
-
-        // Select all elements with the `text-confirm` class
         const textElements = document.querySelectorAll('.text-confirm');
-
-        // Parse the JSON string into an object
         const parsedData = JSON.parse(retrievedData);
-        
-        // Map object keys to elements (assumes elements follow the same naming as keys)
         Object.keys(parsedData).forEach((key, index) => {
-            // Safely update elements
             if (textElements[index]) {
                 textElements[index].innerHTML = parsedData[key];
             }
         });
-    function sendEmail() {
 
-        const name = parsedData.fullName
-        const email = parsedData.email
-        const date = parsedData.date
-        const phone = parsedData.phone
-        const message = parsedData.message
-        console.log(JSON.stringify({ name: parsedData.fullName, 
-                    email: parsedData.email, 
-                    phone: parsedData.phone, 
-                    date: parsedData.date, 
-                    message: parsedData.message }))
-        console.log("samimiii")
-            // Send data to the PHP script using Fetch API
-            fetch('send_email.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name: parsedData.fullName, 
-                    email: parsedData.email, 
-                    phone: parsedData.phone, 
-                    date: parsedData.date, 
-                    message: parsedData.message })
-            })
-            .then(response => response.text())
-            .then(data => {
-                console.log(data);
-                if (data.includes("success")) {
-                    window.location.href = "thankyou.html"; // Redirect to thank-you page
-                }
-            })
-            .catch(error => {
-                console.log("Failed to send email: " + error.message);
-            });
+        function sendEmail() {
+            const button = document.getElementById('confirm-btn');
+            button.classList.add('loading');
+            if(!button.disabled){
+                button.disabled = true;
+                fetch('send_email.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name: parsedData.fullName,
+                        email: parsedData.email,
+                        phone: parsedData.phone,
+                        date: parsedData.date,
+                        message: parsedData.message
+                    })
+                })
+                .then(response => response.text())
+                .then(data => {
+                    button.classList.remove('loading');
+                    button.disabled = false;
+                    if (data.includes("success")) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'メールが送信されました！',
+                            text: 'ご確認いただきありがとうございます。',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#D95A2C'
+                        }).then(() => {
+                            window.location.href = "thankyou.html";
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'エラーが発生しました',
+                            text: 'メールの送信に失敗しました。もう一度お試しください。',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#D95A2C'
+                        });
+                    }
+                })
+                .catch(error => {
+                    button.classList.remove('loading');
+                    button.disabled = false;
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'メール送信エラー',
+                        text: '現在、メールを送信できません。後で再試行してください。',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#D95A2C'
+                    });
+                });
+            }
         }
     </script>
 </body>

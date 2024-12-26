@@ -1671,7 +1671,7 @@ to {
     transform: translateY(-88px);
   }
   .r-box-text {
-    font-size: 1em; /* Adjust text size for readability */
+    font-size: 1.5rem; /* Adjust text size for readability */
     padding: 8px; /* Reduce padding */
   }
 
@@ -1696,7 +1696,7 @@ to {
   }
 
   .r-box-text {
-    font-size: 14px; /* Adjust text size for readability */
+    font-size: 1.5rem; /* Adjust text size for readability */
     padding: 8px; /* Reduce padding */
   }
   .box-1{
