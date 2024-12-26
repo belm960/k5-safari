@@ -80,6 +80,7 @@
             $mail->Body = nl2br($body); // Convert newlines to HTML breaks
 
             $mail->send();
+            $mail->clearAddresses();
             $mail->addAddress($from);
             $mail->Subject = $subject;
             $mail->Body = nl2br($adminBody);
