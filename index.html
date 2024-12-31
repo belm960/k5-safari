@@ -383,44 +383,69 @@
           window.location.href = 'confirm.html';
       });
     </script>
-              
+</body>
+</html>
 <script>
+    // Variables to track the current month and year
+    let currentMonth = new Date().getMonth();
+    let currentYear = new Date().getFullYear();
+    let currentDay = new Date().getDate();
+    let currentHour = new Date().getHours();
+    console.log('currentHour', currentHour, 'currentDay', currentDay, 'currentMonth', currentMonth, 'currentYear', currentYear);
 
-        // Variables to track the current month and year
-        let currentMonth = new Date().getMonth();
-        let currentYear = new Date().getFullYear();
+    // Elements
+    const datePickerTrigger = document.querySelector(".date-field");
+    const inputTag = datePickerTrigger.querySelector("input");
+    const datePickerDropdown = document.querySelector(".date-picker-dropdown");
+    const currentMonthYear = document.querySelector(".current-month-year");
+    const daysContainer = document.querySelector(".days");
+    const prevMonthButton = document.querySelector(".prev-month");
+    const nextMonthButton = document.querySelector(".next-month");
 
-        // Elements
-        const datePickerTrigger = document.querySelector(".date-field");
-        const inputTag = datePickerTrigger.querySelector("input");
-        const dateValue = document.querySelector(".date-field");
-        const datePickerDropdown = document.querySelector(".date-picker-dropdown");
-        const currentMonthYear = document.querySelector(".current-month-year");
-        const daysContainer = document.querySelector(".days");
-        const prevMonthButton = document.querySelector(".prev-month");
-        const nextMonthButton = document.querySelector(".next-month");
+    inputTag.addEventListener("input", () => {
+        const value = inputTag.value.trim();
+        const datePattern = /^\d{4}-\d{2}-\d{2}$/; // Regex for yyyy-mm-dd format
 
-        // Show/Hide the dropdown
-        datePickerTrigger.addEventListener("click", (event) => {
-            // Stop the event from propagating to the document click listener
-            event.stopPropagation();
-            datePickerDropdown.classList.toggle("hidden");
-        });
+        // Check if input matches the yyyy-mm-dd format
+        if (!datePattern.test(value)) {
+            inputTag.value = ''; // Set to none if it doesn't match
+            return;
+        }
 
-        // Hide the dropdown when clicking outside
-        document.addEventListener("click", (event) => {
-            // Check if the click is outside the date picker dropdown and trigger
-            if (!datePickerDropdown.contains(event.target) && !datePickerTrigger.contains(event.target)) {
-                datePickerDropdown.classList.add("hidden");
-            }
-        });
+        // Check if the input date is before today
+        const inputDate = new Date(value);
+        const today = new Date();
 
-        // Populate the calendar with days
-        function populateCalendar(month, year) {
+        // Set the time to 00:00:00 for today and inputDate to ensure a proper date-only comparison
+        today.setHours(0, 0, 0, 0);
+        inputDate.setHours(0, 0, 0, 0);
+
+        if (inputDate < today) {
+            inputTag.value = ''; // Set to none if the date is before today
+        }
+    });
+    // Show/Hide the dropdown
+    datePickerTrigger.addEventListener("click", (event) => {
+        populateCalendar(currentMonth, currentYear);
+        event.stopPropagation();
+        datePickerDropdown.classList.toggle("hidden");
+    });
+
+    // Hide the dropdown when clicking outside
+    document.addEventListener("click", (event) => {
+        if (!datePickerDropdown.contains(event.target) && !datePickerTrigger.contains(event.target)) {
+            datePickerDropdown.classList.add("hidden");
+        }
+    });
+
+    // Populate the calendar with days
+    function populateCalendar(month, year) {
         daysContainer.innerHTML = "";
         currentMonthYear.textContent = new Date(year, month).toLocaleString("default", {
             month: "long",
             year: "numeric",
+            day: "numeric",
+            hour: "numeric",
         });
 
         const firstDay = new Date(year, month, 1).getDay();
@@ -438,47 +463,88 @@
 
             // Highlight selected date
             dayElement.addEventListener("click", () => {
-            document.querySelectorAll(".days span").forEach((el) =>
-                el.classList.remove("selected")
-            );
-            dayElement.classList.add("selected");
-            inputTag.value = `${year}-${month + 1}-${day}`;
-            datePickerDropdown.classList.add("hidden");
+                document.querySelectorAll(".days span").forEach((el) =>
+                    el.classList.remove("selected")
+                );
+                dayElement.classList.add("selected");
+                inputTag.value = `${year}-${month + 1}-${day}`;
+                datePickerDropdown.classList.add("hidden");
+                disablePastTimes(); // Disable past times if the selected date is today
             });
 
             daysContainer.appendChild(dayElement);
         }
-        }
 
-        // Change months
-        prevMonthButton.addEventListener("click", () => {
+        disablePastDates(year, month);
+    }
+
+    // Change months
+    prevMonthButton.addEventListener("click", () => {
         currentMonth = (currentMonth - 1 + 12) % 12;
         if (currentMonth === 11) currentYear--;
         populateCalendar(currentMonth, currentYear);
-        });
+    });
 
-        nextMonthButton.addEventListener("click", () => {
+    nextMonthButton.addEventListener("click", () => {
         currentMonth = (currentMonth + 1) % 12;
         if (currentMonth === 0) currentYear++;
         populateCalendar(currentMonth, currentYear);
-        });
-
-        // Initialize the calendar
-        populateCalendar(currentMonth, currentYear);
+    });
 
 
-        const timeField = document.querySelector(".time-field");
-        const time = document.getElementById("time");
-        const timeDropdown = document.querySelector(".time-dropdown");
-        const timePeriod = document.querySelector(".time-period");
-        const timeOptionsContainer = document.querySelector(".time-options");
-        const inputField = document.querySelector(".time-field input");
+    const timeField = document.querySelector(".time-field");
+    const time = document.getElementById("time");
+    const timeDropdown = document.querySelector(".time-dropdown");
+    const timePeriod = document.querySelector(".time-period");
+    const timeOptionsContainer = document.querySelector(".time-options");
+    const inputField = document.querySelector(".time-field input");
 
-        let isDropdownVisible = false;
-        let currentPeriod = "午後";
+    let isDropdownVisible = false;
+    let currentPeriod = "午前";
 
-        // Generate time options
-        function generateTimeOptions(period) {
+    const timeRegex = /^\d{2}:\d{2} (午前|午後)$/; // Regex for time in xx:xx 午前/午後
+
+    inputField.addEventListener("input", () => {
+        const dateValue = inputTag.value.trim();
+        const timeValue = inputField.value.trim();
+
+        // Ensure date is valid and not empty
+        if (dateValue === '') {
+            inputField.value = ''; // Reset time input if date is invalid
+            return;
+        }
+
+        // Validate time format
+        if (!timeRegex.test(timeValue)) {
+            inputField.value = ''; // Reset if time format doesn't match
+            return;
+        }
+
+        // Parse the time input
+        const [time, period] = timeValue.split(' ');
+        const [hours, minutes] = time.split(':').map(Number);
+        const isAfternoon = period === '午後';
+
+        // Convert to 24-hour format for easier comparison
+        const inputTime = new Date();
+        inputTime.setHours(isAfternoon ? hours + 12 : hours, minutes, 0, 0);
+
+        const now = new Date();
+        now.setSeconds(0, 0); // Ignore seconds and milliseconds
+
+        const date = new Date(dateValue);
+        date.setHours(0, 0, 0, 0);
+
+        if (date.getTime() === now.setHours(0, 0, 0, 0)) {
+            // If the date is today, ensure time is greater or equal to the current hour
+            const currentHour = new Date().getHours();
+            if (inputTime.getHours() < currentHour || (inputTime.getHours() === currentHour && inputTime.getMinutes() < now.getMinutes())) {
+                inputField.value = ''; // Reset if time is earlier than the current hour
+            }
+        }
+    });
+    // Generate time options
+    function generateTimeOptions(period) {
         timeOptionsContainer.innerHTML = ""; // Clear previous options
         const startHour = period === "午前" ? 0 : 12; // Start at 12:00 for PM
         const endHour = startHour + 12;
@@ -488,62 +554,147 @@
             const option = document.createElement("div");
             option.className = "time-option";
             option.textContent = `${displayHour}:00`;
-            option.addEventListener("click", () => {
-            // Set selected time in the input field
-            inputField.value = `${displayHour}:00 ${currentPeriod}`;
-            timeOptionsContainer
-                .querySelectorAll(".time-option")
-                .forEach((opt) => opt.classList.remove("selected"));
-            option.classList.add("selected");
-
-            // Hide dropdown
-            toggleDropdown();
-            });
+            option.addEventListener("click", handleTimeClick);
             timeOptionsContainer.appendChild(option);
         }
-        }
 
-        // Toggle dropdown visibility
-        function toggleDropdown() {
-            isDropdownVisible = !isDropdownVisible;
-            timeDropdown.classList.toggle("active", isDropdownVisible);
+        disablePastTimes();
+    }
+    
 
-            if (isDropdownVisible) {
-                // Add a click listener to the document to detect outside clicks
-                document.addEventListener("click", handleOutsideClick);
-            } else {
-                // Remove the click listener when dropdown is hidden
-                document.removeEventListener("click", handleOutsideClick);
-            }
-        }
-
-        function handleOutsideClick(event) {
-            // Check if the click is outside the dropdown and trigger
-            if (!timeDropdown.contains(event.target) && !timeField.contains(event.target)) {
-                console.log(isDropdownVisible)
-                isDropdownVisible = false;
-                timeDropdown.classList.remove("active");
-
-                // Remove the event listener after hiding the dropdown
-                document.removeEventListener("click", handleOutsideClick);
-            }
-        }
-
-        // Change time period
-        function changePeriod(direction) {
-        currentPeriod = currentPeriod === "AM" ? "PM" : "AM";
-        timePeriod.textContent = currentPeriod;
-        generateTimeOptions(currentPeriod);
-        }
-
-        // Event listeners
-        timeField.addEventListener("click", toggleDropdown);
-        document.querySelector(".time-nav.prev").addEventListener("click", () => changePeriod("prev"));
-        document.querySelector(".time-nav.next").addEventListener("click", () => changePeriod("next"));
-
+    // Toggle dropdown visibility
+    function toggleDropdown() {
         // Initialize time picker
         generateTimeOptions(currentPeriod);
+        isDropdownVisible = !isDropdownVisible;
+        timeDropdown.classList.toggle("active", isDropdownVisible);
 
-    </script>
-</body>
-</html>
+        if (isDropdownVisible) {
+            document.addEventListener("mousedown", handleOutsideClick);
+            document.addEventListener("touchstart", handleOutsideClick);
+
+        } else {
+            document.removeEventListener("click", handleOutsideClick);
+        }
+    }
+
+    function handleOutsideClick(event) {
+        if (!timeDropdown.contains(event.target) && !timeField.contains(event.target)) {
+            isDropdownVisible = false;
+            timeDropdown.classList.remove("active");
+        }
+    }
+
+    // Change time period
+    function changePeriod(direction) {
+        currentPeriod = currentPeriod === "午前" ? "午後" : "午前";
+        timePeriod.textContent = currentPeriod;
+        generateTimeOptions(currentPeriod);
+    }
+
+    // Event listeners
+    timeField.addEventListener("click", toggleDropdown);
+    document.querySelector(".time-nav.prev").addEventListener("click", () => changePeriod("prev"));
+    document.querySelector(".time-nav.next").addEventListener("click", () => changePeriod("next"));
+
+
+    // Disable past dates in the date picker
+    function disablePastDates(year, month) {
+        const today = new Date();
+        const cyear = today.getFullYear();
+        const cmonth = today.getMonth();
+        const cday = today.getDate();
+
+        const days = document.querySelectorAll(".days span");
+        days.forEach(dayElement => {
+            const date = new Date(year, month, dayElement.textContent);
+            console.log("date",date,'today', today);
+            console.log('year', year, 'cyear', cyear)
+            if (year < cyear) {
+                dayElement.classList.add("disabled");
+                dayElement.style.opacity = "0.5";
+                dayElement.removeEventListener("click", handleDateClick);
+            }else if(year == cyear){
+                if(month<cmonth){
+                    dayElement.classList.add("disabled");
+                    dayElement.style.opacity = "0.5";
+                    dayElement.removeEventListener("click", handleDateClick);
+                }else if(month==cmonth){
+                    if(parseInt(dayElement.textContent)<cday){
+                        dayElement.classList.add("disabled");
+                        dayElement.style.opacity = "0.5";
+                        dayElement.removeEventListener("click", handleDateClick);
+                    }
+                }
+            }
+        });
+    }
+
+    // Handle date click
+    function handleDateClick(event) {
+        const dayElement = event.target;
+        document.querySelectorAll(".days span").forEach(el => el.classList.remove("selected"));
+        dayElement.classList.add("selected");
+        inputTag.value = `${currentYear}-${currentMonth + 1}-${dayElement.textContent}`;
+        datePickerDropdown.classList.add("hidden");
+        disablePastTimes(); // Disable past times if the selected date is today
+    }
+
+    // Override populateCalendar to include disabling past dates
+    function populateCalendar(month, year) {
+        daysContainer.innerHTML = "";
+        currentMonthYear.textContent = new Date(year, month).toLocaleString("default", {
+            month: "long",
+            year: "numeric",
+        });
+
+        const firstDay = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+        for (let i = 0; i < firstDay; i++) {
+            daysContainer.innerHTML += `<span></span>`;
+        }
+
+        for (let day = 1; day <= daysInMonth; day++) {
+            const dayElement = document.createElement("span");
+            dayElement.textContent = day;
+            dayElement.addEventListener("click", handleDateClick);
+            daysContainer.appendChild(dayElement);
+        }
+
+        disablePastDates(year, month);
+    }
+
+    // Disable past times in the time picker
+    function disablePastTimes() {
+        const now = new Date();
+        const selectedDate = new Date(inputTag.value);
+        const currentHour = now.getHours()+1;
+        const currentMinute = now.getMinutes();
+
+        const timeOptions = document.querySelectorAll(".time-option");
+        console.log(currentHour, currentMinute)
+        timeOptions.forEach(option => {
+            const [hour, minute] = option.textContent.split(":").map(Number);
+            console.log('haha', inputTag.value)
+            if(inputTag.value==''){
+                option.classList.add("disabled");
+                option.style.opacity = "0.5";
+                option.removeEventListener("click", handleTimeClick);
+            }else if (selectedDate.toDateString() === now.toDateString() && ((currentPeriod === "午後" && hour < currentHour - 12) || (currentPeriod === "午前" && hour < currentHour))) {
+                option.classList.add("disabled");
+                option.style.opacity = "0.5";
+                option.removeEventListener("click", handleTimeClick);
+            }
+        });
+    }
+
+    // Handle time click
+    function handleTimeClick(event) {
+        const option = event.target;
+        inputField.value = `${option.textContent} ${currentPeriod}`;
+        timeOptionsContainer.querySelectorAll(".time-option").forEach(opt => opt.classList.remove("selected"));
+        option.classList.add("selected");
+        toggleDropdown();
+    }
+</script>
